@@ -18,7 +18,6 @@ mongoose.connect(db,{ useNewUrlParser: true,useUnifiedTopology: true, },(err,db)
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
-
 app.use(passport.initialize());
 require("./config/passport")(passport);
 
