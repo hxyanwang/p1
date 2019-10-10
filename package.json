@@ -1,0 +1,23 @@
+{
+  "name": "p1",
+  "version": "1.0.0",
+  "description": "111",
+  "main": "serve.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js"
+  },
+  "author": "hxy",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^3.0.6",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "gravatar": "^1.8.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.7.0",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "sqlite3": "^4.1.0"
+  }
+}
