@@ -16,7 +16,7 @@ router.post("/add",passport.authenticate("jwt",{session:false}),(req,res)=>{
 	})
 })
 
-router.post("/edit/",passport.authenticate("jwt",{session:false}),(req,res)=>{
+router.post("/edit",passport.authenticate("jwt",{session:false}),(req,res)=>{
 	let profileObj=req.body;
 	// console.log(profileObj);
 	Profile.findOneAndUpdate(
@@ -33,7 +33,7 @@ router.post("/edit/",passport.authenticate("jwt",{session:false}),(req,res)=>{
 	)
 })
 
-router.post("/delete/",passport.authenticate("jwt",{session:false}),(req,res)=>{
+router.post("/delete",passport.authenticate("jwt",{session:false}),(req,res)=>{
 	Profile.findOneAndRemove(
 		{_id:req.body.id},
 		(err,profile)=>{
