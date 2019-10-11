@@ -4,14 +4,18 @@
   "description": "111",
   "main": "serve.js",
   "scripts": {
+    "client-install": "npm install --prefix client",
+    "client": "npm start --prefix client",
     "start": "node server.js",
-    "server": "nodemon server.js"
+    "server": "nodemon server.js",
+    "dev": "concurrently \"npm run client\" \"npm run server\""
   },
   "author": "hxy",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^3.0.6",
     "body-parser": "^1.19.0",
+    "concurrently": "^5.0.0",
     "express": "^4.17.1",
     "gravatar": "^1.8.0",
     "jsonwebtoken": "^8.5.1",
@@ -19,5 +23,9 @@
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "sqlite3": "^4.1.0"
+  },
+  "devDependencies": {
+    "node-sass": "^4.12.0",
+    "sass-loader": "^8.0.0"
   }
 }
