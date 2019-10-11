@@ -10,7 +10,6 @@
 		name:"index",
 		components:{},
 	}
-	console.log(1111);
 </script>
 
 <style lang="scss">
