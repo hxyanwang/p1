@@ -4,9 +4,9 @@
 		<section class="form_container">
 			<div class="manage_tip">
 				<span class="title">11后台管理</span>
-				<el-form :model="registerUser"  :rules="rules" ref="registerForm" label-width="80px" class="registerForm">
+				<el-form :model="registerUser"  :rules="rules" ref="registerUser" label-width="80px" class="registerForm">
 				  
-					<el-form-item label="用户名" prop="user">
+					<el-form-item label="用户名" prop="name">
 						<el-input  v-model="registerUser.name" placeholder="请输入用户名"></el-input>
 					</el-form-item>
 					<el-form-item label="邮箱" prop="email">
@@ -19,7 +19,7 @@
 						<el-input type="password"  v-model="registerUser.pass2" placeholder="请确认密码"></el-input>
 					</el-form-item>
 					
-					<el-form-item label="选择身份" prop="identity">
+					<el-form-item label="选择身份" prop="identity" required>
 						<el-select v-model="registerUser.identity" placeholder="请选择">
 							<el-option label="管理员" value='admin'></el-option>
 							<el-option label="访客" value='visitor'></el-option>
@@ -27,7 +27,7 @@
 					</el-form-item>
 					
 					<el-form-item>
-						<el-button type="primary" class='submit_btn' @click="subForm('registerForm')">注册</el-button>
+						<el-button type="primary" class='submit_btn' @click="subForm">注册</el-button>
 					</el-form-item>
 				  
 				</el-form>
@@ -41,20 +41,83 @@
 		name:"register",
 		components:{},
 		data(){
+			let validatePass = (rule, value, callback) => {
+			    if (value !== this.registerUser.pass) {
+					callback(new Error('密码不一致'));
+			    } else {
+					callback();
+			    }
+			};
 			return{
-				registerUser:{
-					name:'',
-					email:'',
-					pass:'',
-					pass2:'',
-					identity:'',
-				},
+				registerUser:{},
 				rules:{
-					
+					name:[
+						{
+							required: true, 
+							message: '用户名不能为空', 
+							trigger: 'blur'
+						},
+						{
+							min:2,
+							max:30,
+							message: '长度2-30',
+							trigger: 'blur'
+						}
+					],
+					email:[
+						{
+							required: true, 
+							message: '邮箱不能为空', 
+							trigger: 'blur'
+						},
+						{
+							type:'email',
+							message: '邮箱格式不对', 
+							trigger: 'blur'
+						},
+					],
+					pass:[
+						{
+							required: true, 
+							message: '密码不能为空', 
+							trigger: 'blur'
+						},
+						{
+							min:6,
+							max:18,
+							message: '长度6-18',
+							trigger: 'blur'
+						}
+					],
+					pass2:[
+						{
+							required: true, 
+							message: '确认密码不能为空', 
+							trigger: 'blur'
+						},
+						{ 
+							validator: validatePass, 
+							trigger: 'blur' ,
+						}
+					],
 				},
 			}
 		},
 		methods:{
+			subForm(obj){
+				// if(!this.registerUser.identity){
+				// 	alert('身份没选');
+				// 	return
+				// }
+				this.$refs['registerUser'].validate(valid => {
+					if (valid) {
+						alert('submit!');
+					} else {
+						console.log('error submit!!');
+						return false;
+					}
+				})
+			}
 		}
 	}
 </script>
@@ -63,10 +126,10 @@
 	.register {
 	  position: relative;
 	  width: 100%;
-	  height: 100%;
+	  height: auto;
 	  img{
 		  width: 100%;
-		  height: 100%;
+		  height: auto;
 	  }
 	}
 	.form_container {
@@ -74,7 +137,9 @@
 	  height: 210px;
 	  position: absolute;
 	  top: 10%;
-	  left: 34%;
+	  left: 0;
+	  right: 0;
+	  margin: auto;
 	  padding: 25px;
 	  border-radius: 5px;
 	  text-align: center;
