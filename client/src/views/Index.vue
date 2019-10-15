@@ -1,7 +1,7 @@
 <template>
 	<div class='index'>
 		初始化
-		<span>11111</span>
+		<span>111111</span>
 	</div>
 </template>
 
