@@ -10,10 +10,10 @@ const keys= require("../../config/key");
 router.post('/register',(req,res)=>{
 	User.find({'email':req.body.email},(err, result)=>{
 		if(err){
-			res.json("错误"+err);
+			res.status(400).json("错误"+err);
 			return;
 		}else if(result.length!==0){
-			res.json("重复"+result);
+			res.status(400).json("重复"+result);
 			return;
 		}else{
 			let avatar = gravatar.url(req.body.email,{s:200,r:'pg',d:'mm'})
@@ -27,14 +27,14 @@ router.post('/register',(req,res)=>{
 			bcrypt.genSalt(10,(err,salt)=>{
 				bcrypt.hash(newUser.password,salt,(err,hash)=>{
 					if(err){
-						res.json("错误"+err);
+						res.status(400).json("错误"+err);
 						return;
 					}else{
 						// console.log(hash);
 						newUser.password=hash;
 						newUser.save(newUser,(err,doc)=>{
 							if(err){
-								res.json("错误"+err);
+								res.status(400).json("错误"+err);
 								return;
 							}
 							res.json(doc);

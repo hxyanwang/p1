@@ -112,10 +112,6 @@
 		},
 		methods:{
 			subForm(obj){
-				// if(!this.registerUser.identity){
-				// 	alert('身份没选');
-				// 	return
-				// }
 				this.$refs['registerUser'].validate(valid => {
 					if (valid) {
 						alert('submit!');
