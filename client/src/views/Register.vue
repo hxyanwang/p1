@@ -12,14 +12,14 @@
 					<el-form-item label="邮箱" prop="email">
 						<el-input  v-model="registerUser.email" placeholder="请输入邮箱"></el-input>
 					</el-form-item>
-					<el-form-item label="密码" prop="pass">
-						<el-input type="password"  v-model="registerUser.pass" placeholder="请输入密码"></el-input>
+					<el-form-item label="密码" prop="password">
+						<el-input type="password"  v-model="registerUser.password" placeholder="请输入密码"></el-input>
 					</el-form-item>
-					<el-form-item label="确认密码" prop="pass2">
-						<el-input type="password"  v-model="registerUser.pass2" placeholder="请确认密码"></el-input>
+					<el-form-item label="确认密码" prop="password2">
+						<el-input type="password"  v-model="registerUser.password2" placeholder="请确认密码"></el-input>
 					</el-form-item>
 					
-					<el-form-item label="选择身份" prop="identity" required>
+					<el-form-item label="选择身份" prop="identity" >
 						<el-select v-model="registerUser.identity" placeholder="请选择">
 							<el-option label="管理员" value='admin'></el-option>
 							<el-option label="访客" value='visitor'></el-option>
@@ -42,7 +42,7 @@
 		components:{},
 		data(){
 			let validatePass = (rule, value, callback) => {
-			    if (value !== this.registerUser.pass) {
+			    if (value !== this.registerUser.password) {
 					callback(new Error('密码不一致'));
 			    } else {
 					callback();
@@ -76,7 +76,7 @@
 							trigger: 'blur'
 						},
 					],
-					pass:[
+					password:[
 						{
 							required: true, 
 							message: '密码不能为空', 
@@ -89,7 +89,7 @@
 							trigger: 'blur'
 						}
 					],
-					pass2:[
+					password2:[
 						{
 							required: true, 
 							message: '确认密码不能为空', 
@@ -100,6 +100,13 @@
 							trigger: 'blur' ,
 						}
 					],
+					identity:[
+						{
+							required: true, 
+							message: '选择身份', 
+							trigger: 'change' ,
+						}
+					]
 				},
 			}
 		},
@@ -112,6 +119,21 @@
 				this.$refs['registerUser'].validate(valid => {
 					if (valid) {
 						alert('submit!');
+						this.$axios.post("/api/users/register",this.registerUser)
+							.then(res=>{
+								console.log(res)
+								this.$message({
+									message:'成功',
+									type:'success'
+								})
+							})
+							.catch(err=>{
+								console.log(err)
+								this.$message({
+									message:'失败',
+									type:'error'
+								})
+							})
 					} else {
 						console.log('error submit!!');
 						return false;
