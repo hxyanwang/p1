@@ -51,10 +51,16 @@ export default {
 		subForm(obj){
 			this.$refs['loginUser'].validate(valid => {
 				if (valid) {
-					alert('submit!');
 					this.$axios.post("/api/users/login",this.loginUser)
 						.then(res=>{
-							console.log(res.data.token)
+							const{token}=res.data;
+							localStorage.setItem('TOKEN',token);
+							const decode = jwt_decode(token);
+							// console.log(decode);
+							this.$store.dispatch('setAuthenticated',!this.isEmpty(decode))
+							this.$store.dispatch('setUser',decode)
+							
+							this.$router.push('index')
 						})
 						.catch(err=>{
 							console.log(err)
@@ -68,7 +74,15 @@ export default {
 					return false;
 				}
 			})
-		}
+		},
+		isEmpty(value){
+			return(
+				value===undefined||
+				value===null||
+				(typeof value === 'object' && Object.keys(value).length===0)||
+				(typeof value === 'string' && value.trim().length===0)
+			)
+		},
   }
 
 };
@@ -89,7 +103,9 @@ export default {
   height: 210px;
   position: absolute;
   top: 20%;
-  left: 34%;
+  left: 0;
+  right: 0;
+  margin: auto;
   padding: 25px;
   border-radius: 5px;
   text-align: center;

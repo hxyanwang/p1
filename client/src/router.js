@@ -7,7 +7,7 @@ import Notfound from './views/404.vue'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
@@ -38,3 +38,17 @@ export default new Router({
 	
   ]
 })
+
+//路由守卫
+
+router.beforeEach((to, from, next) => {
+    const token = localStorage.getItem('TOKEN');
+	// console.log(token);
+	if(to.path=='/login'||to.path=='/register'){
+		next();
+	}else{
+		token ? next() : next('/login');
+	}
+});
+
+export default router;

@@ -28,6 +28,7 @@
 					
 					<el-form-item>
 						<el-button type="primary" class='submit_btn' @click="subForm">注册</el-button>
+						<router-link to='/login'>已有账号 登录</router-link>
 					</el-form-item>
 				  
 				</el-form>
@@ -114,7 +115,6 @@
 			subForm(obj){
 				this.$refs['registerUser'].validate(valid => {
 					if (valid) {
-						alert('submit!');
 						this.$axios.post("/api/users/register",this.registerUser)
 							.then(res=>{
 								console.log(res)
@@ -122,6 +122,7 @@
 									message:'成功',
 									type:'success'
 								})
+								this.$router.push('login')
 							})
 							.catch(err=>{
 								console.log(err)
