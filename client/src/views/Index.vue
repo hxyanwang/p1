@@ -1,17 +1,22 @@
 <template>
 	<div class='index'>
 		<headNav></headNav>
-		初始化
-		<span>111111</span>
+		<div class="body">
+			<leftMenu></leftMenu>
+			<router-view></router-view>
+		</div>
+		
 	</div>
 </template>
 
 <script>
-	import headNav from '../components/headNav'
+	import headNav from '../components/HeadNav'
+	import leftMenu from '../components/LeftMenu'
 	export default {
 		name:"index",
 		components:{
-			headNav
+			headNav,
+			leftMenu
 		},
 		created() {
 			this.getToken()
@@ -26,5 +31,13 @@
 </script>
 
 <style lang="scss">
-
+	.index,{
+		height: 100%;
+		width: 100%;
+		overflow:hidden;
+	}
+	.body{
+		height: 100%;
+		display: flex;
+	}
 </style>

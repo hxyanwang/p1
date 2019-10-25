@@ -4,6 +4,8 @@ import Index from './views/Index.vue'
 import Register from './views/Register.vue'
 import Login from './views/Login.vue'
 import Notfound from './views/404.vue'
+import Home from './views/Home.vue'
+import InfoShow from './views/InfoShow.vue'
 
 Vue.use(Router)
 
@@ -12,28 +14,33 @@ const router = new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/',
-      redirect:'/index',
+		path: '/',
+		redirect:'/index',
     },
 	{
-	  path: '/index',
-	  name:'index',
-	  component:Index
+		path: '/index',
+		name:'index',
+		component:Index,
+		children:[
+			{path:'',redirect:'home'},
+			{path:'home',name:'home',component:Home},
+			{path:'infoshow',name:'infoshow',component:InfoShow}
+		]
 	},
 	{
-	  path: '/register',
-	  name:'register',
-	  component:Register
+		path: '/register',
+		name:'register',
+		component:Register
 	},
 	{
-	  path: '/login',
-	  name:'login',
-	  component:Login
+		path: '/login',
+		name:'login',
+		component:Login
 	},
 	{
-	  path: '/*',
-	  name:'/404',
-	  component:Notfound
+		path: '/*',
+		name:'/404',
+		component:Notfound
 	},
 	
   ]

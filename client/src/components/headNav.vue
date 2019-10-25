@@ -38,7 +38,26 @@
 		},
 		methods: {
 			setLog(item){
-				console.log(item);
+				// console.log(item);
+				switch (item){
+					case 'info':
+						this.showInfo()
+						break;
+					case 'quit':
+						this.logOut()
+						break;
+				}
+			},
+			showInfo(){
+				this.$router.push('infoshow')
+					.catch(err=>{
+						console.log(err)
+					})
+			},
+			logOut(){
+				localStorage.removeItem('TOKEN')
+				this.$store.dispatch('clearState');
+				this.$router.push('login')
 			}
 		},
 		computed:{
@@ -49,16 +68,18 @@
 	}
 </script>
 
-<style>
+<style scoped lang="scss">
 	.head-nav {
-	  width: 100%;
-	  height: 70px;
-	  min-width: 600px;
-	  padding: 5px;
-	  box-sizing: border-box;
-	  background: #324057;
-	  color: #fff;
-	  border-bottom: 1px solid #1f2d3d;
+		position: fixed;
+		z-index: 999;
+		width: 100%;
+		height: 70px;
+		min-width: 600px;
+		padding: 5px;
+		box-sizing: border-box;
+		background: #324057;
+		color: #fff;
+		border-bottom: 1px solid #1f2d3d;
 	}
 	.logo-container {
 	  line-height: 60px;

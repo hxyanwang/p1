@@ -25,6 +25,7 @@ axios.interceptors.request.use(config=>{
     return config;
 },error=>{
     // 对请求错误做些什么
+	Message({showClose: true,message: '请求错误',type: 'error'});
 	console.log(error);
     return Promise.reject(error);
 });
@@ -38,7 +39,7 @@ axios.interceptors.response.use(response=>{
 },error=>{
 	// 对响应错误做点什么
 	endLoading();
-	Message({showClose: true,message: '错误',type: 'error'});
+	Message({showClose: true,message: '响应错误',type: 'error'});
 	console.log(error);
 	return Promise.reject(error);
 });
