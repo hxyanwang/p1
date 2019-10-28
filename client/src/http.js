@@ -39,8 +39,9 @@ axios.interceptors.response.use(response=>{
 },error=>{
 	// 对响应错误做点什么
 	endLoading();
-	Message({showClose: true,message: '响应错误',type: 'error'});
-	console.log(error);
+	Message({showClose: true,message: '登录超时请重新登录',type: 'error'});
+	localStorage.removeItem('TOKEN');
+	// location.reload();
 	return Promise.reject(error);
 });
 

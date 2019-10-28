@@ -11,7 +11,11 @@ const passport = require('passport');
 const app =express();
 
 
-mongoose.connect(db,{ useNewUrlParser: true,useUnifiedTopology: true, },(err,db)=>{
+mongoose.connect(db,{ 
+	useNewUrlParser: true,
+	useUnifiedTopology: true, 
+	useFindAndModify: false,
+},(err,db)=>{
 	console.log('connect')
 });
 

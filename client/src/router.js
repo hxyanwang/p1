@@ -6,8 +6,12 @@ import Login from './views/Login.vue'
 import Notfound from './views/404.vue'
 import Home from './views/Home.vue'
 import InfoShow from './views/InfoShow.vue'
+import Fundlist from './views/Fundlist.vue'
 
 Vue.use(Router)
+
+
+
 
 const router = new Router({
   mode: 'history',
@@ -24,7 +28,8 @@ const router = new Router({
 		children:[
 			{path:'',redirect:'home'},
 			{path:'home',name:'home',component:Home},
-			{path:'infoshow',name:'infoshow',component:InfoShow}
+			{path:'infoshow',name:'infoshow',component:InfoShow},
+			{path:'fundlist',name:'fundlist',component:Fundlist}
 		]
 	},
 	{
@@ -57,5 +62,18 @@ router.beforeEach((to, from, next) => {
 		token ? next() : next('/login');
 	}
 });
+
+
+
+
+//点击没问题 如果在这个点击页面 在点击一次router-link 就会报这个错 但是不影响功能
+//去你引用vue-router的页面添加一段代码
+const originalPush = Router.prototype.push
+Router.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
+
+
+
 
 export default router;

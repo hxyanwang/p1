@@ -43,9 +43,6 @@ router.post("/delete",passport.authenticate("jwt",{session:false}),(req,res)=>{
 			}
 			if(profile){
 				res.json(profile);
-				profile.save(profile=>{
-					res.json("删除成功");
-				})
 			}else{
 				res.json("没有这个id");
 			}

@@ -50,9 +50,6 @@
 			},
 			showInfo(){
 				this.$router.push('infoshow')
-					.catch(err=>{
-						console.log(err)
-					})
 			},
 			logOut(){
 				localStorage.removeItem('TOKEN')
