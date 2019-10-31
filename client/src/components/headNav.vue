@@ -3,7 +3,7 @@
 		<el-row type="flex" justify="space-between">
 			<el-col :span='6' class='logo-container'>
 				<img src="../assets/logo.png" class="logo" />
-				<span class="title">1111111111</span>
+				<span class="title">1111aa111111</span>
 			</el-col>
 			<el-col :span='6'  class='user'>
 				<div class="user-info">
