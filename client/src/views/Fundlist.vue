@@ -1,6 +1,10 @@
 <template>
 	<div class="fundList">
-		
+		<el-form class="add-button" :inline="true" ref='addData'>
+			<el-form-item>
+				<el-button type="primary" @click="handleAdd">添加</el-button>
+			</el-form-item>
+		</el-form>
 		<el-table
 		    :data="list"
 		    style="width: 100%"
@@ -117,6 +121,9 @@
 						console.log(err);
 					})
 			},
+			handleAdd(){
+				console.log('tj')
+			},
 			handleEdit(index, row) {
 				console.log(index, row);
 			},
@@ -140,6 +147,10 @@
 	}
 	.el-table th>.cell{
 		background: black;
+	}
+	.add-button{
+		display: flex;
+		justify-content: flex-end;
 	}
 
 </style>
